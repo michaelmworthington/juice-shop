@@ -1,22 +1,23 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:9-alpine' 
-        }
+  agent {
+    docker {
+      image 'node:9-alpine'
     }
-	stages {
-		stage('Build'){
-			steps {
-                //nodejs('nodjs_9_11_1_auto') {
-                    sh 'npm install'
-                //}
-			}		
-      	}
-		stage('Policy Evaluation Dev'){
-			steps {
-        			nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'JuiceShop', iqScanPatterns: [[scanPattern: '**/*']], iqStage: 'build', jobCredentialsId: ''
-				//nexusPolicyEvaluation iqApplication: 'JuiceShop', iqStage: 'build'
-			}
-		}
-	}
+
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'npm install'
+      }
+    }
+    stage('Policy Evaluation Dev') {
+      steps {
+        nexusPolicyEvaluation(iqApplication: 'JuiceShop', iqScanPatterns: [[scanPattern: '**/*']], iqStage: 'build')
+      }
+    }
+  }
+  environment {
+    HOME = '.'
+  }
 }
