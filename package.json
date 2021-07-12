@@ -93,7 +93,7 @@
     "sequelize": "^4.35.1",
     "serve-favicon": "~2.5",
     "serve-index": "~1.9",
-    "socket.io": "~2.1",
+    "socket.io": "~4.1",
     "sqlite3": "~4.0.0",
     "swagger-ui-express": "~3.0.7",
     "z85": "~0.0"
